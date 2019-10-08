@@ -1,5 +1,6 @@
 node_modules
 logs/*.log
+ssl/*
 /.vagrant
 .webpack-cache
 public

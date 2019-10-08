@@ -1,13 +1,17 @@
 const paths = require('./paths');
 const fs = require('fs');
 
+const isDev = () => process.env.NODE_ENV === "development";
+const isProd = () => process.env.NODE_ENV === "production";
+
 const registerDotEnvFiles = () => {
-    const dotenvFiles = [
-        `${paths.dotenv}.${process.env.NODE_ENV}.local`,
-        `${paths.dotenv}.${process.env.NODE_ENV}`,
-        process.env.NODE_ENV !== 'test' && `${paths.dotenv}.local`,
-        paths.dotenv,
-    ].filter(Boolean);
+    const dotenvFiles = [].filter(Boolean);
+
+    if (isDev()) {
+        dotenvFiles.push(paths.dotenv.dev);
+    } else if (isProd()) {
+        dotenvFiles.push(paths.dotenv.prod);
+    }
 
     dotenvFiles.forEach((dotenvFile) => {
         if (fs.existsSync(dotenvFile)) {
@@ -19,5 +23,7 @@ const registerDotEnvFiles = () => {
 };
 
 module.exports = {
-    registerDotEnvFiles
+    registerDotEnvFiles,
+    isDev,
+    isProd
 };
