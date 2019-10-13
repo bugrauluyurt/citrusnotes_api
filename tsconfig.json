@@ -23,7 +23,8 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "typeRoots": [
-      "./node_modules/@types"
+      "./node_modules/@types",
+      "./node_modules/moment"
     ],
     "lib": [
       "es5",
@@ -39,6 +40,6 @@
       "es2015.symbol",
       "es2015.symbol.wellknown",
       "esnext.asynciterable"
-    ],
+    ]
   }
 }
