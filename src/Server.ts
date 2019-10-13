@@ -3,20 +3,10 @@ import { registerDotEnvFiles } from '../config/env';
 import { getSettings } from "../config/settings";
 import {$log} from "ts-log-debug";
 import * as path from "path";
-import * as fs from "fs";
+const rootDir = path.resolve(__dirname);
 registerDotEnvFiles();
 
-const httpsOptions = {
-    key: fs.readFileSync(path.resolve(__dirname, '../ssl/key.pem'), 'utf-8'),
-    cert: fs.readFileSync(path.resolve(__dirname, '../ssl/certificate.pem'), 'utf-8'),
-    passphrase:  process.env.PASSPHRASE
-};
-const settings = {
-    ...getSettings().server,
-    httpsOptions
-};
-
-@ServerSettings(settings)
+@ServerSettings(getSettings(rootDir).server)
 export class Server extends ServerLoader {
   /**
    * This method let you configure the express middleware required by your application to works.
@@ -33,7 +23,7 @@ export class Server extends ServerLoader {
     // create a rotating write stream for logging
     const accessLogStream = rfs('access.log', {
       interval: '1d', // rotate daily
-      path: path.join(process.cwd(), '/../logs')
+      path: path.resolve(__dirname, '../logs')
     });
 
     this
