@@ -1,9 +1,9 @@
-import {Controller, Get} from "@tsed/common";
+import { Controller, Get } from '@tsed/common';
 
-@Controller("/calendars")
+@Controller('/calendars')
 export class CalendarCtrl {
     @Get()
     findAll(): string {
-        return "This action returns all calendars";
+        return 'This action returns all calendars';
     }
 }
