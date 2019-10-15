@@ -1,3 +1,4 @@
+/*eslint-disable */
 const paths = require('./paths');
 const fs = require('fs');
 
