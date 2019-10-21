@@ -19,3 +19,4 @@ bundle-stats.json
 .idea
 /dependency-graph.svg
 .DS_STORE
+dist/**/*
