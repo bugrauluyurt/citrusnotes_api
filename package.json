@@ -11,6 +11,9 @@
     "test": "mocha --reporter spec --check-leaks --bail test/",
     "tsc": "tsc --project tsconfig.json",
     "tsc:w": "tsc -w",
+    "seed:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -c seed -n",
+    "seed:run": "ts-node ./node_modules/typeorm/cli.js migration:run -c seed",
+    "seed:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -c seed",
     "start": "cross-env NODE_ENV=development nodemon --watch '**/*.ts' --ignore 'node_modules/**/*' --exec ts-node src/index.ts"
   },
   "author": "Bugra Uluyurt",
