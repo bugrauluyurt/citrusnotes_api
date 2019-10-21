@@ -1,21 +1,11 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import moment from 'moment';
 import chalk from 'chalk';
-import { firstLetterUpperCase } from '../utils/default';
+import { logWithColor } from '../utils/default';
 import { isDev } from './env';
-
-const logWithColor = (key, value): void => {
-    const colorDefaultLog = chalk.green;
-    const colorBold = chalk.bold;
-    const timeStamp = moment().format('YYYY-MM-DDTHH:MM:SS.SSS');
-
-    const keyLogMessage = colorBold(firstLetterUpperCase(key));
-    const valueLogMessage = JSON.stringify(value);
-
-    const defaultLogMessage = colorDefaultLog(`[${timeStamp}] [INFO ] [ULOG] -`);
-    console.log(`${defaultLogMessage} ${keyLogMessage} ${valueLogMessage}`);
-};
+import { services } from '../src/services';
+// import { repositories } from '../src/repositories';
+import { getConnectionSettings } from './connection';
 
 const logSettings = ({ server, morgan }: { [key: string]: any }): void => {
     const boundaryLine = '----------------------------------------';
@@ -44,11 +34,16 @@ export const getSettings = (rootDir: string): { [key: string]: any } => {
             mount: {
                 '/rest': `${rootDir}/controllers/**/**.ts`,
             },
+            componentsScan: [
+                ...services,
+                //...repositories
+            ],
             port: process.env.PORT,
             httpPort: true,
             acceptMimes: ['application/json'],
             env: process.env.NODE_ENV,
         },
+        connection: getConnectionSettings(rootDir),
         morgan: process.env.MORGAN_CONFIG,
     } as { [key: string]: any };
 

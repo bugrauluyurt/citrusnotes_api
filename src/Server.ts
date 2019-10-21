@@ -1,5 +1,6 @@
 import { GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings } from '@tsed/common';
 import { registerDotEnvFiles } from '../config/env';
+import '@tsed/typeorm'; // import typeorm ts.ed module
 import { getSettings } from '../config/settings';
 import { $log } from 'ts-log-debug';
 import * as path from 'path';
@@ -7,7 +8,12 @@ import * as path from 'path';
 const rootDir = path.resolve(__dirname);
 registerDotEnvFiles();
 
-@ServerSettings(getSettings(rootDir).server)
+const { server: serverSettings, connection: connectionSettings } = getSettings(rootDir);
+
+@ServerSettings({
+    serverSettings,
+    connectionSettings,
+})
 export class Server extends ServerLoader {
     /**
      * This method let you configure the express middleware required by your application to works.
