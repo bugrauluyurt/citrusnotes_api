@@ -9,7 +9,10 @@ export class ConnectionPaths {
 
 export class ConnectionBuilder {
     static readonly DB_TYPE_POSTGRES: string = 'postgres';
-    static readonly DB_TYPE_MONGODB: string = 'mongodb';
+    static readonly DB_TYPE_MONGO: string = 'mongodb';
+
+    static readonly DB_NAME_POSTGRES: string = 'DB_POSTGRES';
+    static readonly DB_NAME_MONGO: string = 'DB_MONGO';
 
     private readonly name: string;
     private readonly type: string;
@@ -51,7 +54,7 @@ export class ConnectionBuilder {
                     delete setting.password;
                 }
                 return setting;
-            case ConnectionBuilder.DB_TYPE_MONGODB:
+            case ConnectionBuilder.DB_TYPE_MONGO:
                 return {};
         }
         return {};
@@ -73,7 +76,11 @@ export class ConnectionBuilder {
 }
 
 export const getConnectionSettings = (serverRoot: string): { [key: string]: any } => {
-    const pg = new ConnectionBuilder(serverRoot, 'default', 'postgres');
+    const pg = new ConnectionBuilder(
+        serverRoot,
+        ConnectionBuilder.DB_NAME_POSTGRES,
+        ConnectionBuilder.DB_TYPE_POSTGRES,
+    );
     pg.setConnectionFolder('entities', 'models');
     return {
         typeorm: [pg.getSetting()],

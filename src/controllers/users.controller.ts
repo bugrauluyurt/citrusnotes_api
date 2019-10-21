@@ -1,6 +1,6 @@
 import { Controller, Get } from '@tsed/common';
 
-@Controller('/user')
+@Controller('/users')
 export class UsersController {
     @Get()
     findOne(): string {

@@ -8,12 +8,9 @@ import * as path from 'path';
 const rootDir = path.resolve(__dirname);
 registerDotEnvFiles();
 
-const { server: serverSettings, connection: connectionSettings } = getSettings(rootDir);
+const { server: serverSettings } = getSettings(rootDir);
 
-@ServerSettings({
-    serverSettings,
-    connectionSettings,
-})
+@ServerSettings(serverSettings)
 export class Server extends ServerLoader {
     /**
      * This method let you configure the express middleware required by your application to works.

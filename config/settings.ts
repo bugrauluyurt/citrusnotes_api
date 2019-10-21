@@ -4,7 +4,7 @@ import chalk from 'chalk';
 import { logWithColor } from '../utils/default';
 import { isDev } from './env';
 import { services } from '../src/services';
-// import { repositories } from '../src/repositories';
+import { repositories } from '../src/repositories';
 import { getConnectionSettings } from './connection';
 
 const logSettings = ({ server, morgan }: { [key: string]: any }): void => {
@@ -34,16 +34,13 @@ export const getSettings = (rootDir: string): { [key: string]: any } => {
             mount: {
                 '/rest': `${rootDir}/controllers/**/**.ts`,
             },
-            componentsScan: [
-                ...services,
-                //...repositories
-            ],
+            componentsScan: [...services, ...repositories],
             port: process.env.PORT,
             httpPort: true,
             acceptMimes: ['application/json'],
             env: process.env.NODE_ENV,
+            ...getConnectionSettings(rootDir),
         },
-        connection: getConnectionSettings(rootDir),
         morgan: process.env.MORGAN_CONFIG,
     } as { [key: string]: any };
 
