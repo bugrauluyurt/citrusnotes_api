@@ -24,7 +24,7 @@
     "esModuleInterop": true,
     "typeRoots": [
       "./node_modules/@types",
-      "./node_modules/moment"
+      "./node_modules/moment/moment.d.ts"
     ],
     "lib": [
       "es5",

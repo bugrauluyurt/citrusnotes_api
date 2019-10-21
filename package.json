@@ -1,7 +1,7 @@
 {
   "name": "citrusnotes_api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Citrusnotes API",
   "main": "index.js",
   "scripts": {
     "build": "npm run tsc",
@@ -13,7 +13,7 @@
     "tsc:w": "tsc -w",
     "start": "cross-env NODE_ENV=development nodemon --watch '**/*.ts' --ignore 'node_modules/**/*' --exec ts-node src/index.ts"
   },
-  "author": "",
+  "author": "Bugra Uluyurt",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.1",
@@ -27,9 +27,9 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "@tsed/common": "^5.31.3",
-    "@tsed/core": "^5.31.3",
-    "@tsed/di": "^5.31.3",
+    "@tsed/common": "^5.32.1",
+    "@tsed/core": "^5.32.1",
+    "@tsed/di": "^5.32.1",
     "@tsed/typeorm": "^5.32.1",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
