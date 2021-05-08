@@ -55,6 +55,6 @@
     "morgan": "^1.9.1",
     "pg": "^7.12.1",
     "rotating-file-stream": "^1.4.4",
-    "typeorm": "^0.2.20"
+    "typeorm": "^0.2.25"
   }
 }
